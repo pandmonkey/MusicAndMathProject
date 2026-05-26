@@ -1,0 +1,25 @@
+# 噪声生成
+colorednoise>=2.2.0
+
+# MIDI 处理
+midiutil>=1.2.1
+pretty_midi>=0.2.10
+
+# 音乐理论与乐谱
+music21>=9.1.0
+
+# 音频分析
+librosa>=0.10.0
+soundfile>=0.12.0
+
+# 数据分析与可视化
+numpy>=1.24.0
+scipy>=1.10.0
+matplotlib>=3.7.0
+
+# FluidSynth Python 绑定
+pyfluidsynth>=1.3.0
+
+# Jupyter 支持
+jupyter>=1.0.0
+ipykernel>=6.0.0

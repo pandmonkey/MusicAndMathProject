@@ -1,1 +1,40 @@
+# Obsidian
 .obsidian/
+
+# Python virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+
+# Generated data (large files)
+data/audio/**/*.wav
+data/audio/**/*.mp3
+data/midi/**/*.mid
+data/noise_sequences/*.npy
+data/scores/*.pdf
+data/analysis/figures/*.png
+data/analysis/*.json
+
+# SoundFont files (large)
+soundfonts/*.sf2
+soundfonts/*.sf3
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Output files
+output/**/*.wav
+output/**/*.mp3
+output/**/*.mid
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

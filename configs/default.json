@@ -1,0 +1,32 @@
+{
+  "name": "default",
+  "noise": {
+    "beta": 1.0,
+    "num_samples": 256,
+    "seed": null
+  },
+  "melody": {
+    "scale": "C_major",
+    "octave_low": 4,
+    "octave_high": 5,
+    "bpm": 100,
+    "time_signature": [
+      4,
+      4
+    ],
+    "min_measures": 16,
+    "duration_weights": {
+      "whole": 0.05,
+      "half": 0.15,
+      "quarter": 0.35,
+      "eighth": 0.3,
+      "sixteenth": 0.15
+    },
+    "midi_program": 0,
+    "velocity": 80
+  },
+  "render": {
+    "sample_rate": 44100,
+    "soundfont_path": "/Users/minimax/Workspace/大三下/音数/MusicAndMathProject/soundfonts/TimGM6mb.sf2"
+  }
+}
