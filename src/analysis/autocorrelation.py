@@ -199,6 +199,66 @@ def compute_fractal_dimension(hurst_exponent: float) -> float:
     return 2.0 - hurst_exponent
 
 
+def compute_dfa_raw(sequence: np.ndarray, order: int = 1) -> dict:
+    """返回 DFA 分析的完整数据（用于可视化）。"""
+    seq = sequence.astype(float)
+    n = len(seq)
+    profile = np.cumsum(seq - np.mean(seq))
+
+    min_window = max(order + 2, 4)
+    max_window = n // 4
+
+    scales = []
+    fluctuations = []
+
+    window = min_window
+    while window <= max_window:
+        n_segments = n // window
+        if n_segments < 1:
+            break
+
+        local_fluctuations = []
+        for direction in [0, 1]:
+            for seg in range(n_segments):
+                if direction == 0:
+                    start = seg * window
+                else:
+                    start = n - (seg + 1) * window
+                end = start + window
+                segment = profile[start:end]
+                x = np.arange(window)
+                coeffs = np.polyfit(x, segment, order)
+                trend = np.polyval(coeffs, x)
+                local_fluctuations.append(np.mean((segment - trend) ** 2))
+
+        if local_fluctuations:
+            f_n = np.sqrt(np.mean(local_fluctuations))
+            scales.append(window)
+            fluctuations.append(f_n)
+
+        window = max(window + 1, int(window * 1.25))
+
+    if len(scales) < 3:
+        return {"scales": [], "fluctuations": [], "alpha": 0.5, "r_squared": 0.0}
+
+    log_scales = np.log(scales)
+    log_fluct = np.log(fluctuations)
+    coeffs = np.polyfit(log_scales, log_fluct, 1)
+    alpha = coeffs[0]
+
+    predicted = np.polyval(coeffs, log_scales)
+    ss_res = np.sum((log_fluct - predicted) ** 2)
+    ss_tot = np.sum((log_fluct - np.mean(log_fluct)) ** 2)
+    r_squared = 1 - ss_res / ss_tot if ss_tot > 0 else 0.0
+
+    return {
+        "scales": scales,
+        "fluctuations": fluctuations,
+        "alpha": float(alpha),
+        "r_squared": float(r_squared),
+    }
+
+
 def dfa_to_beta(alpha: float) -> float:
     """从 DFA 标度指数转换为频谱指数 β。
 

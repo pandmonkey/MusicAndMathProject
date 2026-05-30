@@ -19,11 +19,14 @@ from src.analysis.autocorrelation import (
     estimate_dfa,
     estimate_hurst_rs,
     compute_fractal_dimension,
+    compute_dfa_raw,
     dfa_to_hurst,
 )
 from src.analysis.statistics import (
     pitch_distribution,
     interval_distribution,
+    interval_direction_stats,
+    zipf_analysis,
     summary_statistics,
 )
 from src.analysis.visualization import (
@@ -32,6 +35,9 @@ from src.analysis.visualization import (
     plot_pitch_distribution,
     plot_interval_distribution,
     plot_noise_sequence,
+    plot_zipf,
+    plot_dfa_scaling,
+    plot_interval_direction,
 )
 
 DATA_DIR = PROJECT_ROOT / "data"
@@ -87,9 +93,13 @@ def run_single(config: PipelineConfig, noise_type: str) -> dict:
 
     # DFA（主方法）+ R/S（参考对比）
     dfa_alpha, dfa_r2 = estimate_dfa(pitches)
+    dfa_raw = compute_dfa_raw(pitches)
     hurst_rs = estimate_hurst_rs(pitches)
     hurst_dfa, signal_type = dfa_to_hurst(dfa_alpha)
     fractal_dim = compute_fractal_dimension(hurst_dfa)
+
+    zipf = zipf_analysis(pitches)
+    direction = interval_direction_stats(pitches)
 
     stats = summary_statistics(pitches)
     stats["spectral_exponent_beta"] = beta_psd
@@ -112,6 +122,9 @@ def run_single(config: PipelineConfig, noise_type: str) -> dict:
         "audio_path": str(audio_path),
         "psd": (freqs, psd, beta_psd),
         "acf": acf,
+        "dfa_raw": dfa_raw,
+        "zipf": zipf,
+        "direction": direction,
         "stats": stats,
     }
 
@@ -134,6 +147,9 @@ def run_comparison(
         print(f"  Fractal D = {stats['fractal_dimension']:.2f}, "
               f"Entropy = {stats['entropy']:.2f}, "
               f"Zipf slope = {stats['zipf_slope']:.2f}")
+        d = stats["direction"]
+        print(f"  Direction: ↑{d['ascending']:.0%} ↓{d['descending']:.0%} "
+              f"={d['repeated']:.0%}")
 
     # 生成对比图表
     print("\n生成分析图表...")
@@ -180,6 +196,26 @@ def _generate_comparison_plots(results: dict[str, dict]):
     plot_interval_distribution(
         {k: interval_distribution(v["pitches"]) for k, v in results.items()},
         FIGURES_DIR / "interval_distribution.png",
+    )
+
+    # Zipf 定律 log-log 图
+    plot_zipf(
+        {k: v["zipf"] for k, v in results.items()},
+        FIGURES_DIR / "zipf_analysis.png",
+    )
+
+    # DFA 标度关系图
+    plot_dfa_scaling(
+        {k: (v["dfa_raw"]["scales"], v["dfa_raw"]["fluctuations"],
+             v["dfa_raw"]["alpha"], v["dfa_raw"]["r_squared"])
+         for k, v in results.items()},
+        FIGURES_DIR / "dfa_scaling.png",
+    )
+
+    # 音程方向对比
+    plot_interval_direction(
+        {k: v["direction"] for k, v in results.items()},
+        FIGURES_DIR / "interval_direction.png",
     )
 
     print(f"  图表已保存到 {FIGURES_DIR}/")
