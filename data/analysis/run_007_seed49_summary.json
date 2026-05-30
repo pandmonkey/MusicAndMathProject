@@ -1,0 +1,54 @@
+{
+  "pink": {
+    "num_notes": 256,
+    "pitch_range": 23,
+    "pitch_mean": 71.4296875,
+    "pitch_std": 6.986240487726124,
+    "interval_mean": 4.141176470588236,
+    "interval_std": 5.400793083999645,
+    "unique_pitches": 14,
+    "entropy": 3.8069180027871123,
+    "direction": {
+      "ascending": 0.41568627450980394,
+      "descending": 0.4117647058823529,
+      "repeated": 0.17254901960784313
+    },
+    "zipf_slope": -0.02789694840592041,
+    "zipf_r2": 0.725865275334868,
+    "spectral_exponent_beta": 1.020321519380556,
+    "spectral_fit_r2": 0.7959312565663241,
+    "dfa_alpha": 1.1109485528042267,
+    "dfa_r2": 0.9973867767330661,
+    "dfa_beta": 1.2218971056084533,
+    "hurst_dfa": 0.11094855280422666,
+    "hurst_rs": 0.8516198118791863,
+    "signal_type": "fBm",
+    "fractal_dimension": 1.8890514471957733
+  },
+  "brown": {
+    "num_notes": 256,
+    "pitch_range": 23,
+    "pitch_mean": 71.4296875,
+    "pitch_std": 6.986240487726124,
+    "interval_mean": 1.1215686274509804,
+    "interval_std": 1.6449566416599486,
+    "unique_pitches": 14,
+    "entropy": 3.8069180027871123,
+    "direction": {
+      "ascending": 0.25882352941176473,
+      "descending": 0.27058823529411763,
+      "repeated": 0.47058823529411764
+    },
+    "zipf_slope": -0.02789694840592041,
+    "zipf_r2": 0.725865275334868,
+    "spectral_exponent_beta": 1.4569586100127496,
+    "spectral_fit_r2": 0.9056941065193674,
+    "dfa_alpha": 1.2396958820848396,
+    "dfa_r2": 0.9911873080754583,
+    "dfa_beta": 1.4793917641696792,
+    "hurst_dfa": 0.2396958820848396,
+    "hurst_rs": 0.9895031401215789,
+    "signal_type": "fBm",
+    "fractal_dimension": 1.7603041179151604
+  }
+}

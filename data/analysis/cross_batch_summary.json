@@ -1,0 +1,28 @@
+{
+  "pink": {
+    "n_runs": 10,
+    "beta_mean": 0.947815735482215,
+    "beta_std": 0.11644394747524753,
+    "dfa_alpha_mean": 0.9983397256525783,
+    "hurst_dfa_mean": 0.3983397256525783,
+    "hurst_rs_mean": 0.9033085176832761,
+    "fractal_dim_mean": 1.6016602743474215,
+    "interval_mean": 4.267058823529412,
+    "zipf_slope_mean": -0.027896948405920406,
+    "ascending_mean": 0.41529411764705887,
+    "descending_mean": 0.4094117647058823
+  },
+  "brown": {
+    "n_runs": 10,
+    "beta_mean": 1.8010339384068825,
+    "beta_std": 0.16133469514155188,
+    "dfa_alpha_mean": 1.3895742189345772,
+    "hurst_dfa_mean": 0.3895742189345774,
+    "hurst_rs_mean": 0.9786044185089148,
+    "fractal_dim_mean": 1.6104257810654226,
+    "interval_mean": 1.3964705882352944,
+    "zipf_slope_mean": -0.027896948405920406,
+    "ascending_mean": 0.2796078431372549,
+    "descending_mean": 0.2850980392156862
+  }
+}

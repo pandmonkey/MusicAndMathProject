@@ -10,14 +10,11 @@ __pycache__/
 *$py.class
 *.egg-info/
 
-# Generated data (large files)
+# Generated data (large audio files)
 data/audio/**/*.wav
 data/audio/**/*.mp3
-data/midi/**/*.mid
 data/noise_sequences/*.npy
 data/scores/*.pdf
-data/analysis/figures/*.png
-data/analysis/*.json
 
 # SoundFont files (large)
 soundfonts/*.sf2
